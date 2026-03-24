@@ -1,77 +1,102 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Plane, Users } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import { WebinarType } from '../types';
-import logo from '../assets/logo.png';
+import { useState, useEffect } from "react";
+import { Menu, X, Plane, Users } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
+import { WebinarType } from "../types";
+import logo from "../assets/logo.png";
 
 interface HeaderProps {
   activeWebinar: WebinarType;
-  onWebinarChange: (type: WebinarType) => void;
 }
 
-export default function Header({ activeWebinar, onWebinarChange }: HeaderProps) {
+export default function Header({ activeWebinar }: HeaderProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // ✅ Scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // ✅ CLOSE mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
-    { name: 'Discover', href: '#discover' },
-    { name: 'Agenda', href: '#agenda' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'FAQ', href: '#faq' },
+    { name: "Discover", href: "#discover" },
+    { name: "Agenda", href: "#agenda" },
+    { name: "Testimonials", href: "#testimonials" },
+    { name: "FAQ", href: "#faq" },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-white/80 backdrop-blur-xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] py-3' 
-          : 'bg-transparent py-6'
+        isScrolled
+          ? "bg-[#0B0F1A]/80 backdrop-blur-xl border-b border-white/10 py-3 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)]"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <div className="flex items-center gap-8">
 
-          {/* 🔥 LOGO REPLACED */}
-          <a href="#" className="flex items-center gap-3 group">
+          {/* LOGO */}
+          <div
+            onClick={() => navigate("/pilot")}
+            className="flex items-center gap-3 cursor-pointer group"
+          >
             <img
               src={logo}
               alt="Aeromitra Aviation"
               className="h-11 w-auto transition-transform duration-500 group-hover:scale-105"
             />
 
-            <span className={`font-black text-2xl tracking-tighter hidden sm:block transition-colors duration-300 ${isScrolled ? 'text-gray-900' : 'text-white'}`}>
+            <span className="font-black text-2xl tracking-tighter hidden sm:block text-white">
               AEROMITRA <span className="text-[#CFAF57]">AVIATION</span>
             </span>
-          </a>
+          </div>
 
-          {/* Webinar Switcher */}
-          <div className={`flex p-1 rounded-full border ${isScrolled ? 'bg-gray-100 border-gray-200' : 'bg-white/10 border-white/20'}`}>
+          {/* 🔥 TOGGLE */}
+          <div className="relative flex p-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+
+            {/* Animated Pill */}
+            <motion.div
+              layout
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="absolute top-1 bottom-1 w-1/2 rounded-full bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] shadow-[0_0_20px_rgba(207,175,87,0.4)]"
+              animate={{
+                x: activeWebinar === "pilot" ? "0%" : "100%",
+              }}
+            />
+
+            {/* Pilot */}
             <button
-              onClick={() => onWebinarChange('pilot')}
-              className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                activeWebinar === 'pilot'
-                  ? 'bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] text-[#0B1445] shadow-sm'
-                  : isScrolled ? 'text-gray-500 hover:text-[#CFAF57]' : 'text-white/70 hover:text-[#F4D77A]'
+              onClick={() => navigate("/pilot")}
+              className={`relative z-10 flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                activeWebinar === "pilot"
+                  ? "text-black"
+                  : "text-white/70 hover:text-[#F4D77A]"
               }`}
             >
               <Plane size={14} />
               Pilot
             </button>
 
+            {/* Crew */}
             <button
-              onClick={() => onWebinarChange('cabin-crew')}
-              className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                activeWebinar === 'cabin-crew'
-                  ? 'bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] text-[#0B1445] shadow-sm'
-                  : isScrolled ? 'text-gray-500 hover:text-[#CFAF57]' : 'text-white/70 hover:text-[#F4D77A]'
+              onClick={() => navigate("/crew")}
+              className={`relative z-10 flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                activeWebinar === "cabin-crew"   // ✅ FIXED
+                  ? "text-black"
+                  : "text-white/70 hover:text-[#F4D77A]"
               }`}
             >
               <Users size={14} />
@@ -86,9 +111,7 @@ export default function Header({ activeWebinar, onWebinarChange }: HeaderProps) 
             <a
               key={link.name}
               href={link.href}
-              className={`text-sm font-medium transition-colors ${
-                isScrolled ? 'text-gray-600 hover:text-[#CFAF57]' : 'text-white/90 hover:text-[#F4D77A]'
-              }`}
+              className="text-sm font-medium text-white/80 hover:text-[#F4D77A] transition-colors"
             >
               {link.name}
             </a>
@@ -96,41 +119,40 @@ export default function Header({ activeWebinar, onWebinarChange }: HeaderProps) 
 
           <a
             href="#registration"
-            className="bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] text-[#0B1445] px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg hover:scale-105"
+            className="bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] text-black px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-[0_10px_30px_-10px_rgba(207,175,87,0.6)] hover:scale-105"
           >
             Register Now
           </a>
         </nav>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Toggle */}
         <button
           className="md:hidden p-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <X className={isScrolled ? 'text-gray-900' : 'text-white'} />
+            <X className="text-white" />
           ) : (
-            <Menu className={isScrolled ? 'text-gray-900' : 'text-white'} />
+            <Menu className="text-white" />
           )}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden bg-[#0B0F1A]/95 backdrop-blur-xl border-t border-white/10"
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-5 py-6 space-y-5">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-base font-medium text-gray-900 hover:text-[#CFAF57]"
+                  className="block text-base text-white/80 hover:text-[#F4D77A]"
                 >
                   {link.name}
                 </a>
@@ -138,8 +160,7 @@ export default function Header({ activeWebinar, onWebinarChange }: HeaderProps) 
 
               <a
                 href="#registration"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full text-center bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] text-[#0B1445] px-6 py-3 rounded-xl font-semibold"
+                className="block w-full text-center bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] text-black px-6 py-3 rounded-xl font-semibold"
               >
                 Register Now
               </a>

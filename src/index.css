@@ -43,3 +43,33 @@
     @apply font-display tracking-tight;
   }
 }
+.input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 16px;
+  border-radius: 16px;
+  color: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #CFAF57;
+  box-shadow: 0 0 0 3px rgba(207,175,87,0.2);
+}
+.popup-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: white;
+  outline: none;
+  transition: 0.2s;
+}
+
+.popup-input:focus {
+  border-color: #CFAF57;
+  box-shadow: 0 0 0 2px rgba(207,175,87,0.2);
+}
