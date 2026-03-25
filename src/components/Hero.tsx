@@ -1,5 +1,13 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Calendar, Clock, MapPin, ChevronRight, ChevronLeft, ChevronRight as NextIcon, Plane } from 'lucide-react';
+import {
+  Calendar,
+  Clock,
+  MapPin,
+  ChevronRight,
+  ChevronLeft,
+  ChevronRight as NextIcon,
+  Plane,
+} from 'lucide-react';
 import { WebinarData } from '../types';
 import { useState } from 'react';
 
@@ -56,19 +64,30 @@ export default function Hero({ data }: HeroProps) {
 
           {/* Info */}
           <div className="flex gap-6 mb-10 text-white/70">
-            <div className="flex items-center gap-2"><Calendar size={16} /> {data.date}</div>
-            <div className="flex items-center gap-2"><Clock size={16} /> {data.time}</div>
-            <div className="flex items-center gap-2"><MapPin size={16} /> {data.location}</div>
+            <div className="flex items-center gap-2">
+              <Calendar size={16} /> {data.date}
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock size={16} /> {data.time}
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPin size={16} /> {data.location}
+            </div>
           </div>
 
-          {/* CTA */}
+          {/* ✅ CTA FIXED */}
           <div className="flex gap-4">
             <a
               href="#registration"
-              className="bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] text-[#0A1333] px-8 py-4 rounded-xl font-bold flex items-center gap-2"
+              className="bg-gradient-to-r from-[#CFAF57] to-[#F4D77A] text-[#0A1333] px-8 py-4 rounded-xl font-bold flex items-center gap-2 relative"
             >
-              Book Seat ₹{data.id === 'pilot' ? 149 : 99}
+              Register Free
               <ChevronRight />
+
+              {/* FREE BADGE */}
+              <span className="absolute -top-2 -right-2 text-[10px] bg-green-500/20 text-green-400 px-2 py-1 rounded-full">
+                FREE
+              </span>
             </a>
 
             <a
@@ -80,10 +99,10 @@ export default function Hero({ data }: HeroProps) {
           </div>
         </div>
 
-        {/* RIGHT — BIG HERO CARD */}
+        {/* RIGHT — HERO CARD */}
         <div className="relative">
 
-          {/* Arrows */}
+          {/* LEFT ARROW */}
           <button
             onClick={prev}
             className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-full hover:bg-white/20"
@@ -91,6 +110,7 @@ export default function Hero({ data }: HeroProps) {
             <ChevronLeft />
           </button>
 
+          {/* RIGHT ARROW */}
           <button
             onClick={next}
             className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-xl border border-white/20 p-3 rounded-full hover:bg-white/20"
@@ -133,7 +153,6 @@ export default function Hero({ data }: HeroProps) {
           </AnimatePresence>
 
         </div>
-
       </div>
     </section>
   );

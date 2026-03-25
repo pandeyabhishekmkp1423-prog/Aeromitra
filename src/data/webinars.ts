@@ -24,7 +24,7 @@ export const webinars: Record<string, WebinarData> = {
       },
     ],
 
-    date: '5th April 2026',
+    date: '12 April 2026',
     time: '11:00 AM IST',
     location: 'Online Live',
 
@@ -69,7 +69,7 @@ export const webinars: Record<string, WebinarData> = {
 
     agenda: [
   {
-    time: "01:00 PM",
+    time: "11:05 AM",
     title: "Pilot Journey – Step-by-Step Clarity",
     points: [
       "Complete roadmap from beginner to Commercial Pilot License (CPL)",
@@ -79,7 +79,7 @@ export const webinars: Record<string, WebinarData> = {
     ]
   },
   {
-    time: "01:40 PM",
+    time: "11:20 PM",
     title: "Global Training & Exposure",
     points: [
       "Why many pilots choose international flight training",
@@ -88,7 +88,7 @@ export const webinars: Record<string, WebinarData> = {
     ]
   },
   {
-    time: "02:10 PM",
+    time: "11:30 PM",
     title: "Ground School & Training Foundation",
     points: [
       "Importance of strong DGCA subject fundamentals",
@@ -97,7 +97,7 @@ export const webinars: Record<string, WebinarData> = {
     ]
   },
   {
-    time: "02:40 PM",
+    time: "11:40 PM",
     title: "Training Cost & Planning",
     points: [
       "Real cost breakdown (ground + flying + additional expenses)",
@@ -106,7 +106,7 @@ export const webinars: Record<string, WebinarData> = {
     ]
   },
   {
-    time: "03:05 PM",
+    time: "11:50 PM",
     title: "License Conversion Guidance",
     points: [
       "Overview of converting foreign CPL to DGCA",
@@ -115,7 +115,7 @@ export const webinars: Record<string, WebinarData> = {
     ]
   },
   {
-    time: "03:30 PM",
+    time: "11:55 PM",
     title: "Live Interaction with Aviation Experts",
     points: [
       "Ask real doubts about training and career path",
@@ -186,7 +186,7 @@ export const webinars: Record<string, WebinarData> = {
       },
     ],
 
-    date: '16th Feb 2026',
+    date: '11th April 2026',
     time: '11:00 AM IST',
     location: 'Online Live',
 
@@ -219,7 +219,7 @@ export const webinars: Record<string, WebinarData> = {
 
     agenda: [
       {
-        time: "11:00 AM",
+        time: "11:05 AM",
         title: "Eligibility & Physical Requirements",
         points: [
           "Height, weight, and BMI standards for domestic vs international",
@@ -229,7 +229,7 @@ export const webinars: Record<string, WebinarData> = {
         ]
       },
       {
-        time: "11:45 AM",
+        time: "11:25 AM",
         title: "The 5-Step Selection Process",
         points: [
           "CV shortlisting secrets",
@@ -239,7 +239,7 @@ export const webinars: Record<string, WebinarData> = {
         ]
       },
       {
-        time: "12:30 PM",
+        time: "11:40 PM",
         title: "Training & Career Growth",
         points: [
           "What happens during the 3-month training period",
@@ -249,7 +249,7 @@ export const webinars: Record<string, WebinarData> = {
         ]
       },
       {
-        time: "01:00 PM",
+        time: "11:55 PM",
         title: "Live Mock Interview & Q&A",
         points: [
           "Live demonstration of a group discussion",
