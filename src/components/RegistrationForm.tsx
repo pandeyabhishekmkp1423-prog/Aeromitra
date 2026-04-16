@@ -4,6 +4,8 @@ import { Send, Loader2 } from 'lucide-react';
 import { WebinarType } from '../types';
 import { BackgroundGraphics } from './BackgroundGraphics';
 import { API_URL } from '../config/api';
+import { useEffect } from "react";
+
 
 interface RegistrationFormProps {
   activeWebinar: WebinarType;
@@ -52,7 +54,7 @@ export default function RegistrationForm({ activeWebinar }: RegistrationFormProp
   setStatus('loading');
 
   try {
-    const resPromise = fetch(`${API_URL}/api/register`, {
+    const resPromise = fetch(`${API_URL}/register.php`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
